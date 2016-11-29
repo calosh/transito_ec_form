@@ -1,0 +1,81 @@
+{% extends "master.html" %}
+
+
+{% block titulo %}Estamos en un reporte {% endblock %}
+
+
+{% block contenido %}
+
+<h3>Listado de Vehiculos Matriculados en base al tipo de vehiculos</h3>
+<hr/>
+
+<h5>Tipo de vehiculos</h5>
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Buscar" />
+</form>
+<hr/>
+<div class="row">
+    <div class="col-md-8">
+        <table id="example" class="table table-striped table-bordered display" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th>Placa</th>
+                    <th>Modelo</th>
+                    <th>Marca</th>
+                    <th>Tipo Vehiculo</th>
+                    <th>Provincia</th>
+                    <th>Combustible</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>Placa</th>
+                    <th>Modelo</th>
+                    <th>Marca</th>
+                    <th>Tipo Vehiculo</th>
+                    <th>Provincia</th>
+                    <th>Combustible</th>
+                </tr>
+            </tfoot>
+
+            <tbody class="searchable">
+                    {% for p in vehiculos %}
+                        <tr>
+                            <td>{{p.placa}}</td>
+                            <td>{{p.modelo}}</td>
+                            <td>{{p.marca}}</td>
+                            <td>{{p.idtipov.nombretipov}}</td>
+                            <td>{{p.idprov.nombreprov}}</td>
+                            <td>{{p.idcomb.nombrecomb}}</td>
+                        </tr>
+                    {% endfor %}
+                
+            </tbody>
+        </table>
+
+    </div>
+</div>
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        console.log('llegando');
+        $('#example tfoot th').each( function () {
+                var title = $('#example thead th').eq( $(this).index() ).text();
+                $(this).html( '<input type="text" placeholder="Buscar '+title+'" />' );
+            } );
+
+            var table = $('#example').DataTable();
+            
+            // Apply the search
+            table.columns().eq( 0 ).each( function ( colIdx ) {
+                $( 'input', table.column( colIdx ).footer() ).on( 'keyup change', function () {
+                    table
+                        .column( colIdx )
+                        .search( this.value )
+                        .draw();
+                } );
+            } );      
+    });
+</script> 
+{% endblock %}

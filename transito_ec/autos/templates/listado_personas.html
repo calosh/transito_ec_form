@@ -1,0 +1,14 @@
+<h4>Listado de Personas</h4>
+
+<hr />
+    {%for p in personas%}
+    <ul>
+        <li>{{p.id}}</li>
+        <li>{{p.nombre}}</li>
+        <li>{{p.cedula}}</li>
+        <li><a href="{% url 'provincia' p.provincia.id %}">{{ p.provincia }}</a></li> 
+    </ul>
+    <hr />
+    {%endfor%}
+
+

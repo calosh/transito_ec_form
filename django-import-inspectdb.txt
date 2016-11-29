@@ -1,0 +1,38 @@
+base: base_cnt 
+owner: reroes
+------------
+
+pg_dump -U reroes -W -h localhost base_clase2 > basename.sql
+
+psql -U reroes -W -h localhost base_cnt2 < /home/usuario/Descargas/base-respaldo.sql   
+
+psql -h localhost -U reroes base_miproyecto
+
+--------------
+1.- django-admin startproject transito_ec
+2.- cd transito_ec/
+3.- configurar la base de datos en settings.py # hacerlo con postgres
+4.- python manage.py inspectdb > mimodelo.py
+
+5.- python manage.py startapp autos
+6.- agregar la app en el settings
+7.- python manage.py makemigrations autos
+8.- python manage.py migrate
+9.- python manage.py createsuperuser
+10.- pasar clases al admin
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

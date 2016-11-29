@@ -1,0 +1,12 @@
+<h4>Listado de Provincias</h4>
+
+<hr />
+    {%for p in provincias%}
+    <ul>
+        <li>{{p.id}}</li>
+        <li>{{p.nombre}}</li>
+        <li>{{p.poblacion}}</li>
+    </ul>
+    <hr />
+    {%endfor%}
+
